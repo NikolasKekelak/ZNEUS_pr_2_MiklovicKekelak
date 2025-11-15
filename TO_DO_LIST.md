@@ -1,6 +1,6 @@
 # ✅ Project To-Do List
 
-## Project requitments
+## Project requirements
 
 - [ ] **Data analysis**
 - [ ] **Data preprocessing and normalization**
