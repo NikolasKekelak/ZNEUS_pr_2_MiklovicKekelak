@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c2bcacda-49de-4d8e-9ba2-4bb5be274f25" name="Changes" comment="init">
-      <change afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cuda_availability.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
+    <list default="true" id="c2bcacda-49de-4d8e-9ba2-4bb5be274f25" name="Changes" comment="Something added, dunno know, yesterday was yesterday">
+      <change afterPath="$PROJECT_DIR$/requirments.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +18,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="Jupyter Notebook" />
       </list>
     </option>
   </component>
@@ -45,26 +45,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python.cuda_availability.executor": "Run",
-    "Python.kokotina.executor": "Run",
-    "Python.test.executor": "Run",
-    "Python.translate.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python.cuda_availability.executor&quot;: &quot;Run&quot;,
+    &quot;Python.kokotina.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test.executor&quot;: &quot;Run&quot;,
+    &quot;Python.translate.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\nikol\PycharmProjects\ZNEUS_pr_2_MiklovicKekelak\raw-img" />
       <recent name="C:\Users\nikol\PycharmProjects\ZNEUS_pr_2_MiklovicKekelak" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.kokotina">
+  <component name="RunManager" selected="Python.test">
     <configuration name="cuda_availability" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ZNEUS_pr_2_MiklovicKekelak" />
       <option name="ENV_FILES" value="" />
@@ -155,8 +155,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.kokotina" />
         <item itemvalue="Python.test" />
+        <item itemvalue="Python.kokotina" />
         <item itemvalue="Python.cuda_availability" />
         <item itemvalue="Python.translate" />
       </list>
@@ -209,11 +209,20 @@
       <option name="project" value="LOCAL" />
       <updated>1763196992299</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Something added, dunno know, yesterday was yesterday">
+      <option name="closed" value="true" />
+      <created>1763307224620</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1763307224620</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init" />
-    <option name="LAST_COMMIT_MESSAGE" value="init" />
+    <MESSAGE value="Something added, dunno know, yesterday was yesterday" />
+    <option name="LAST_COMMIT_MESSAGE" value="Something added, dunno know, yesterday was yesterday" />
   </component>
 </project>

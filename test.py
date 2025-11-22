@@ -17,13 +17,13 @@ from config import *
 # =======================
 #  Config
 # =======================
-DATA_DIR = "raw-img"   # folder with 10 subfolders (cats, dogs...)
+DATA_DIR = "./filtered-img"   # folder with 10 subfolders (cats, dogs...)
 BATCH_SIZE = 32
 LR = 1e-3
 NUM_EPOCHS = 20
 VAL_SPLIT = 0.2
 RANDOM_SEED = 42
-IMG_SIZE = 128
+IMG_SIZE = 224
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print("Using device:", DEVICE)
@@ -44,12 +44,25 @@ if torch.cuda.is_available():
 # =======================
 train_transform = transforms.Compose([
     transforms.Resize((IMG_SIZE, IMG_SIZE)),
-    transforms.RandomHorizontalFlip(),
+
+    # AUGMENTÁCIE:
+    transforms.RandomHorizontalFlip(p=0.5),
     transforms.RandomRotation(10),
-    transforms.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2),
+    transforms.ColorJitter(
+        brightness=0.2,
+        contrast=0.2,
+        saturation=0.2,
+        hue=0.02
+    ),
+
     transforms.ToTensor(),
+
+    # NORMALIZÁCIA
     transforms.Normalize([0.485, 0.456, 0.406],
                          [0.229, 0.224, 0.225]),
+
+    # CUTOUT / RANDOM ERASING (po ToTensor!)
+    transforms.RandomErasing(p=0.3)
 ])
 
 val_transform = transforms.Compose([
@@ -91,22 +104,32 @@ val_loader = DataLoader(val_dataset, batch_size=BATCH_SIZE,
 #  Model
 # =======================
 class AnimalCNN(nn.Module):
-    def __init__(self, num_classes: int):
+    def __init__(self, num_classes):
         super().__init__()
 
+        def conv_block(in_c, out_c):
+            return nn.Sequential(
+                nn.Conv2d(in_c, out_c, 3, padding=1),
+                nn.BatchNorm2d(out_c),
+                nn.ReLU(),
+                nn.Conv2d(out_c, out_c, 3, padding=1),
+                nn.BatchNorm2d(out_c),
+                nn.ReLU(),
+                nn.MaxPool2d(2)
+            )
+
         self.features = nn.Sequential(
-            nn.Conv2d(3, 32, 3, padding=1), nn.BatchNorm2d(32), nn.ReLU(), nn.MaxPool2d(2),
-            nn.Conv2d(32, 64, 3, padding=1), nn.BatchNorm2d(64), nn.ReLU(), nn.MaxPool2d(2),
-            nn.Conv2d(64, 128, 3, padding=1), nn.BatchNorm2d(128), nn.ReLU(), nn.MaxPool2d(2),
-            nn.Conv2d(128, 256, 3, padding=1), nn.BatchNorm2d(256), nn.ReLU(), nn.MaxPool2d(2),
+            conv_block(3, 32),  # 224 -> 112
+            conv_block(32, 64),  # 112 -> 56
+            conv_block(64, 128),  # 56 -> 28
+            conv_block(128, 256),  # 28 -> 14
         )
 
         self.classifier = nn.Sequential(
+            nn.AdaptiveAvgPool2d(1),
             nn.Flatten(),
-            nn.Linear(256 * (IMG_SIZE // 16) * (IMG_SIZE // 16), 512),
-            nn.ReLU(),
-            nn.Dropout(0.5),
-            nn.Linear(512, num_classes)
+            nn.Dropout(0.4),
+            nn.Linear(256, num_classes)
         )
 
     def forward(self, x):
