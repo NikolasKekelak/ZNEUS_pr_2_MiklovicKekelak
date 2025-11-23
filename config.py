@@ -1,5 +1,8 @@
 import wandb
 
+SEED = 42
+
+
 run = wandb.init(
     project="10-Animals",
     name="baseline_cnn",
