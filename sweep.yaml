@@ -8,30 +8,28 @@ metric:
 parameters:
 
   model_name:
+    #mozno este skusit AlexNet
     values: ["simple", "resnet-pre-trained",'simple','resnet','our-resnet','small','deep','wide']
 
   learning_rate:
-    distribution: log_uniform_values
-    min: 1e-5
-    max: 5e-3
+    values: [1e-5,1e-4,1e-3,1e-2]
 
   batch_size:
-    values: [32, 64, 128]
+    values: [ 32, 64, 128]
 
   optimizer:
     values: ["adam", "rms"]
 
-  dropout:
-    distribution: uniform
-    min: 0.2
-    max: 0.6
-
   image_size:
-    values: [64,128,224] # nemenit, unless you know what you doin, treba pridat dalsi dataset podla velkosti
+    values: [0,64,128,224] # nemenit, unless you know what you doin, treba pridat dalsi dataset podla velkosti
 
   epochs:
     value: 25
 
+  augmentations:
+    values: [0, 1]
+
+#Asi sa zbavime
 early_terminate:
   type: hyperband
   min_iter: 5

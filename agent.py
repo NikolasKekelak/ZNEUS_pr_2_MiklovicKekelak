@@ -25,9 +25,6 @@ class Agent:
         self._init_model()
         self._init_training_components()
 
-    # =================================================================
-    # UTILS
-    # =================================================================
 
     def _set_seed(self, seed):
         random.seed(seed)
@@ -35,23 +32,17 @@ class Agent:
         torch.manual_seed(seed)
         torch.cuda.manual_seed_all(seed)
 
-    # =================================================================
-    # TRANSFORMS
-    # =================================================================
-
     def _create_transforms(self):
         self.train_tf = transforms.Compose([
             transforms.RandomHorizontalFlip(0.5),
             transforms.RandomRotation(10),
             transforms.ColorJitter(0.2, 0.2, 0.2),
+            transforms.VerticalFlip(0.5),
+            transforms.HorizontalFlip(0.5),
             transforms.ToTensor()
         ])
 
         self.test_tf = transforms.Compose([transforms.ToTensor()])
-
-    # =================================================================
-    # DATA
-    # =================================================================
 
     def _load_data(self):
         root = {}
@@ -66,7 +57,6 @@ class Agent:
 
         full_ds = datasets.ImageFolder(root)
 
-        # class imbalance handling
         all_labels = [lbl for _, lbl in full_ds.samples]
         class_counts = np.bincount(all_labels)
 
@@ -75,9 +65,9 @@ class Agent:
 
         self.class_weights = torch.tensor(class_weights, dtype=torch.float)
 
-        # split train/val
+
         size = len(full_ds)
-        train_size = int(0.8 * size)
+        train_size = int(0.7 * size)
         val_size = size - train_size
 
         self.train_ds, self.val_ds = torch.utils.data.random_split(
@@ -85,7 +75,6 @@ class Agent:
             generator=torch.Generator().manual_seed(self.seed)
         )
 
-        # assign transforms to underlying dataset
         self.train_ds.dataset.transform = self.train_tf
         self.val_ds.dataset.transform = self.test_tf
 
@@ -104,10 +93,6 @@ class Agent:
         )
 
         self.num_classes = len(full_ds.classes)
-
-    # =================================================================
-    # MODEL + LOSS + OPTIMIZER
-    # =================================================================
 
     def _init_model(self):
         self.model = get_model(self.config.model_name).to(self.device)
@@ -129,10 +114,6 @@ class Agent:
             factor=0.5,
             patience=3
         )
-
-    # =================================================================
-    # EVALUATION
-    # =================================================================
 
     def evaluate(self):
         self.model.eval()
@@ -158,10 +139,6 @@ class Agent:
         f1 = f1_score(labels_all, preds_all, average="weighted")
 
         return running_loss / len(self.val_loader), acc, precision, recall, f1
-
-    # =================================================================
-    # TRAINING
-    # =================================================================
 
     def train(self, run):
         best_f1 = 0

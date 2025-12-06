@@ -5,13 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c2bcacda-49de-4d8e-9ba2-4bb5be274f25" name="Changes" comment="Augmentations, data set cleaning, creating bigger net, last one was too small">
-      <change afterPath="$PROJECT_DIR$/agent.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run_sweep.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sweep.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TO_DO_LIST.md" beforeDir="false" afterPath="$PROJECT_DIR$/TO_DO_LIST.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/agent.py" beforeDir="false" afterPath="$PROJECT_DIR$/agent.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eda.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/eda.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sweep.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/sweep.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,8 +36,8 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/NikolasKekelak/ZNEUS_pr_2_MiklovicKekelak&quot;,
-    &quot;accountId&quot;: &quot;a70ea293-cc09-46cc-b96a-42d5c7af1a74&quot;
+    &quot;url&quot;: &quot;https://github.com/NikolasKekelak/ZNEUS_pr_2_MiklovicKekelak.git&quot;,
+    &quot;accountId&quot;: &quot;49276762-822a-42c1-9107-3d5cb9165294&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -68,7 +67,7 @@
       <recent name="C:\Users\nikol\PycharmProjects\ZNEUS_pr_2_MiklovicKekelak" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.cuda_availability">
     <configuration name="cuda_availability" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ZNEUS_pr_2_MiklovicKekelak" />
       <option name="ENV_FILES" value="" />
@@ -169,7 +168,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-41e8cd69c857-64d779b69b7a-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-251.26927.90" />
+        <option value="bundled-python-sdk-ce6832f46686-7b97d883f26b-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-252.25557.178" />
       </set>
     </attachedChunks>
   </component>

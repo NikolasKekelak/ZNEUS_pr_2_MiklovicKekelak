@@ -2,17 +2,17 @@
 
 ## Project requirements
 
-- [ ] **Data analysis**
-- [ ] **Data preprocessing and normalization**
-- [ ] **Data split**
-- [ ] **Augmentations**
-- [ ] **Configuration**
-- [ ] **Experiment tracking**
-- [ ] **Experiments** – meaningful, based on previous experiment results  
-  - [ ] Apply or try improvement techniques  
+- ✅ **Data analysis**
+- ✅ **Data preprocessing and normalization**
+- ✅ **Data split**
+- ✅ **Augmentations**
+- ✅ **Configuration**
+- ✅ **Experiment tracking**
+- ✅ **Experiments** – meaningful, based on previous experiment results  
+  - ✅ Apply or try improvement techniques  
 
 - [ ] **Results and evaluation metrics**
-- [ ] **Clear code**
+- ✅ **Clear code**
 - [ ] **Markdown documentation** 
 - [ ] **Comments**
 - [ ] **Final presentation of project**
