@@ -4,9 +4,7 @@ import torch.nn.functional as F
 from torchvision.models import resnet18, ResNet18_Weights
 
 
-# ---------------------------
-# Factory
-# ---------------------------
+
 def get_model(name: str, num_classes=10, rnn_type="gru"):
     name = name.lower()
 
@@ -24,9 +22,7 @@ def get_model(name: str, num_classes=10, rnn_type="gru"):
     return None
 
 
-# ---------------------------
-# Building blocks
-# ---------------------------
+
 class ConvBlock(nn.Module):
     def __init__(self, in_c, out_c, downsample=False):
         super().__init__()
@@ -61,10 +57,6 @@ class ResidualBlock(nn.Module):
 
 
 class SpatialRNNHead(nn.Module):
-    """
-    Takes a feature map [B, C, H, W], flattens to sequence [B, H*W, C],
-    runs GRU/LSTM, outputs logits.
-    """
     def __init__(
         self,
         in_channels: int,
@@ -105,15 +97,11 @@ class SpatialRNNHead(nn.Module):
         self.fc = nn.Linear(hidden_size * self.num_directions, num_classes)
 
     def forward(self, x):
-        # x: [B, C, H, W] -> seq: [B, H*W, C]
         b, c, h, w = x.shape
         seq = x.permute(0, 2, 3, 1).contiguous().view(b, h * w, c)
 
         out, h_n = self.rnn(seq)
 
-        # h_n:
-        #   GRU: [num_layers*num_dir, B, hidden]
-        #   LSTM: (h_n, c_n) with same shape
         if isinstance(h_n, tuple):  # LSTM
             h_n = h_n[0]
 
@@ -125,9 +113,6 @@ class SpatialRNNHead(nn.Module):
         return self.fc(last_layer)
 
 
-# ---------------------------
-# Recurrent models
-# ---------------------------
 class SmolRNN(nn.Module):
     def __init__(self, num_classes=10, rnn_type="gru"):
         super().__init__()
@@ -258,9 +243,6 @@ class OurResRNN(nn.Module):
 
 
 
-# ---------------------------
-# Quick sanity check (optional)
-# ---------------------------
 if __name__ == "__main__":
     x = torch.randn(4, 3, 128, 128)
     for name in ["small", "jack", "deep", "wide", "our-resnet", "resnet"]:

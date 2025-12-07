@@ -6,20 +6,17 @@ from torch.utils.data import DataLoader
 from sklearn.metrics import f1_score, precision_score, recall_score
 import wandb
 
-from models import get_model     # from your models.py
-from config import SEED          # from config.py
-
+from models import get_model
 import random
 
-
+SEED = 42
 
 class Agent:
     def __init__(self, config):
         self.config = config
         self.seed = config.seed if hasattr(config, "seed") else SEED
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        
-        # Confirm device selection
+
         if torch.cuda.is_available():
             print(f" Using CUDA/GPU: {torch.cuda.get_device_name(0)}")
             print(f"   CUDA Version: {torch.version.cuda}")
@@ -154,8 +151,7 @@ class Agent:
     def train(self, run):
         best_f1 = 0
         best_model_path = None
-        
-        # Create unique model filename based on run ID to avoid overwriting
+
         model_filename = f"best_model_{run.id}.pth"
         
         for epoch in range(self.config.epochs):
@@ -199,14 +195,14 @@ class Agent:
                   f"TrainLoss={train_loss:.4f} ValLoss={val_loss:.4f} "
                   f"ValAcc={val_acc:.4f} F1={f1:.4f}")
 
-            # save best model (unique filename per run)
+
             if f1 > best_f1:
                 best_f1 = f1
                 best_model_path = model_filename
                 torch.save(self.model.state_dict(), model_filename)
                 print(f"Saved best model (F1={best_f1:.4f}) to {model_filename}")
 
-        # Save best model to wandb as artifact
+
         if best_model_path:
             artifact = wandb.Artifact(f"model-{run.id}", type="model")
             artifact.add_file(best_model_path)

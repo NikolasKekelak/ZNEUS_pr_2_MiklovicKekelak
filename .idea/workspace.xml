@@ -4,13 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c2bcacda-49de-4d8e-9ba2-4bb5be274f25" name="Changes" comment="Augmentations, data set cleaning, creating bigger net, last one was too small">
+    <list default="true" id="c2bcacda-49de-4d8e-9ba2-4bb5be274f25" name="Changes" comment="nau">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TO_DO_LIST.md" beforeDir="false" afterPath="$PROJECT_DIR$/TO_DO_LIST.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dokumentacia_10_Animals.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Dokumentacia_10_Animals.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/agent.py" beforeDir="false" afterPath="$PROJECT_DIR$/agent.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eda.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/eda.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cuda_availability.py" beforeDir="false" afterPath="$PROJECT_DIR$/cuda_availability.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sweep.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/sweep.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run_sweep.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_sweep.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/start.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -228,13 +230,22 @@
       <option name="project" value="LOCAL" />
       <updated>1763843549008</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="nau">
+      <option name="closed" value="true" />
+      <created>1765055682524</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1765055682524</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init" />
     <MESSAGE value="Something added, dunno know, yesterday was yesterday" />
     <MESSAGE value="Augmentations, data set cleaning, creating bigger net, last one was too small" />
-    <option name="LAST_COMMIT_MESSAGE" value="Augmentations, data set cleaning, creating bigger net, last one was too small" />
+    <MESSAGE value="nau" />
+    <option name="LAST_COMMIT_MESSAGE" value="nau" />
   </component>
 </project>
