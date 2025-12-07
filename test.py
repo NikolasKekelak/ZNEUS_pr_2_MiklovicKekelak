@@ -6,11 +6,11 @@ from agent import Agent
 if __name__ == "__main__":
 
     config = SimpleNamespace(
-        model_name="wide",   # simple / resnet-pre-trained / vgg
-        lr=1e-4,
-        batch_size=32,
-        epochs=25,
-        image_size=64,
+        model_name="small",   # simple / resnet-pre-trained / vgg
+        lr=1e-3,
+        batch_size=128,
+        epochs=50,
+        image_size=128,
     )
 
     run = wandb.init(

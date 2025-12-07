@@ -18,6 +18,15 @@ class Agent:
         self.config = config
         self.seed = config.seed if hasattr(config, "seed") else SEED
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        
+        # Confirm device selection
+        if torch.cuda.is_available():
+            print(f" Using CUDA/GPU: {torch.cuda.get_device_name(0)}")
+            print(f"   CUDA Version: {torch.version.cuda}")
+            print(f"   GPU Memory: {torch.cuda.get_device_properties(0).total_memory / 1024**3:.2f} GB")
+        else:
+            print("  CUDA not available - using CPU (training will be slower)")
+            print("   Install CUDA-enabled PyTorch to use GPU")
 
         self._set_seed(self.seed)
         self._create_transforms()
@@ -30,15 +39,15 @@ class Agent:
         random.seed(seed)
         np.random.seed(seed)
         torch.manual_seed(seed)
-        torch.cuda.manual_seed_all(seed)
+        if torch.cuda.is_available():
+            torch.cuda.manual_seed_all(seed)
 
     def _create_transforms(self):
         self.train_tf = transforms.Compose([
-            transforms.RandomHorizontalFlip(0.5),
+            transforms.RandomHorizontalFlip(p=0.5),
+            transforms.RandomVerticalFlip(p=0.5),
             transforms.RandomRotation(10),
             transforms.ColorJitter(0.2, 0.2, 0.2),
-            transforms.VerticalFlip(0.5),
-            transforms.HorizontalFlip(0.5),
             transforms.ToTensor()
         ])
 
@@ -52,6 +61,8 @@ class Agent:
             root = "./filtered-img-128"
         elif self.config.image_size == 224:
             root = "./filtered-img-224"
+        elif self.config.image_size == 256:
+            root = "./filtered-img-256"
         else:
             raise ValueError(f"Unsupported image_size: {self.config.image_size}")
 
@@ -95,7 +106,7 @@ class Agent:
         self.num_classes = len(full_ds.classes)
 
     def _init_model(self):
-        self.model = get_model(self.config.model_name).to(self.device)
+       self.model = get_model(self.config.model_name, num_classes=self.num_classes).to(self.device)
 
     def _init_training_components(self):
         self.criterion = nn.CrossEntropyLoss(
@@ -142,6 +153,11 @@ class Agent:
 
     def train(self, run):
         best_f1 = 0
+        best_model_path = None
+        
+        # Create unique model filename based on run ID to avoid overwriting
+        model_filename = f"best_model_{run.id}.pth"
+        
         for epoch in range(self.config.epochs):
             self.model.train()
             running_loss = 0
@@ -183,9 +199,18 @@ class Agent:
                   f"TrainLoss={train_loss:.4f} ValLoss={val_loss:.4f} "
                   f"ValAcc={val_acc:.4f} F1={f1:.4f}")
 
-            # save best
+            # save best model (unique filename per run)
             if f1 > best_f1:
                 best_f1 = f1
-                torch.save(self.model.state_dict(), "best_model.pth")
+                best_model_path = model_filename
+                torch.save(self.model.state_dict(), model_filename)
+                print(f"Saved best model (F1={best_f1:.4f}) to {model_filename}")
+
+        # Save best model to wandb as artifact
+        if best_model_path:
+            artifact = wandb.Artifact(f"model-{run.id}", type="model")
+            artifact.add_file(best_model_path)
+            run.log_artifact(artifact)
+            print(f"Uploaded best model to wandb: {best_model_path}")
 
         return best_f1
